@@ -1,0 +1,9 @@
+[template]
+src = "smb.conf.tmpl"
+dest = "/etc/samba/smb.conf"
+keys = [
+    "/smb/hosts/allow",
+    "/smb/shares",
+    "/smb/user",
+    "/smb/workgroup"
+]

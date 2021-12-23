@@ -1,0 +1,24 @@
+[global]
+   workgroup = {{getv "/smb/workgroup" "WORKGROUP"}}
+   server role = standalone
+   map to guest = bad user
+
+[homes]
+   comment = Home Directories
+   valid users = %S, %D%w%S
+   browseable = no
+   read only = no
+   inherit acls = Yes
+
+{{- range (split (getv "/smb/shares") ",") }}
+{{- $share := split . ":" }}
+{{- if eq (len $share) 2 }}
+
+[{{index $share 0}}]
+   comment = {{index $share 0}}
+   path = {{index $share 1}}
+   read only = no
+   hosts allow = {{getv "/smb/hosts/allow" "127.0. 192.168.0."}}
+   valid users = {{getv "/smb/user" "smbuser"}}
+{{- end }}
+{{- end }}
