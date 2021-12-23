@@ -7,7 +7,6 @@ RUN zypper in -y samba &&\
 
 # Files
 COPY ./root /
-RUN chmod +x /run.sh
 
 # Ports
 EXPOSE 139 445
