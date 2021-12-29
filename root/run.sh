@@ -10,7 +10,7 @@ export SMB_WORKGROUP="${SMB_WORKGROUP:-WORKGROUP}"
 confd -onetime -backend env
 
 # Create user
-useradd "$SMB_USER"
+getent passwd "$SMB_USER" >/dev/null || useradd "$SMB_USER"
 echo -e "${SMB_PASSWORD:-$SMB_USER}\n${SMB_PASSWORD:-$SMB_USER}" | smbpasswd -L -D 1 -s -a "$SMB_USER"
 
 # Configure shutdown handler
