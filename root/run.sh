@@ -17,7 +17,7 @@ echo -e "${SMB_PASSWORD:-$SMB_USER}\n${SMB_PASSWORD:-$SMB_USER}" | smbpasswd -L 
 trap 'kill $PID' SIGINT SIGTERM
 
 # Start Samba
-/usr/sbin/smbd --foreground --log-stdout --no-process-group &
+/usr/sbin/smbd --foreground --debug-stdout --no-process-group &
 PID=$!
 
 # Wait for shutdown
